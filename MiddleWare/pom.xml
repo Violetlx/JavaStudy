@@ -17,4 +17,7 @@
 	<packaging>pom</packaging>
 	<description>MiddleWare 集合</description>
 
+	<modules>
+		<module>XxlJob</module>
+	</modules>
 </project>
