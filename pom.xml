@@ -44,6 +44,7 @@
     <!--子模块-->
     <modules>
         <module>JavaSE</module>
+        <module>MiddleWare</module>
     </modules>
 
     <!--依赖管理-->
