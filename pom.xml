@@ -45,6 +45,7 @@
     <modules>
         <module>JavaSE</module>
         <module>MiddleWare</module>
+        <module>JavaSkill</module>
     </modules>
 
     <!--依赖管理-->
