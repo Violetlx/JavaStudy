@@ -8,7 +8,10 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
+/**
+ * 拦截器配置
+ * @author lixuan
+ */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 

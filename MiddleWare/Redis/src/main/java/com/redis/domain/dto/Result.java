@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 响应封装类
+ * @author lixuan
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

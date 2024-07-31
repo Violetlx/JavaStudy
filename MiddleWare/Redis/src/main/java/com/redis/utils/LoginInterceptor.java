@@ -6,6 +6,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 
 /**
+ * 拦截器
  * @author lixuan
  */
 public class LoginInterceptor implements HandlerInterceptor {

@@ -2,6 +2,9 @@ package com.redis.mapper;
 
 import com.redis.domain.entity.Voucher;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author 1045754
@@ -10,7 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.redis.domain.entity.Voucher
 */
 public interface VoucherMapper extends BaseMapper<Voucher> {
-
+    List<Voucher> queryVoucherOfShop(@Param("shopId") Long shopId);
 }
 
 

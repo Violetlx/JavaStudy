@@ -15,6 +15,7 @@ import static com.redis.utils.RedisConstants.LOGIN_USER_KEY;
 import static com.redis.utils.RedisConstants.LOGIN_USER_TTL;
 
 /**
+ * 刷新token拦截器
  * @author lixuan
  */
 public class RefreshTokenInterceptor implements HandlerInterceptor {

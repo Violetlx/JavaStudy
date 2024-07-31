@@ -25,6 +25,6 @@ mybatis-plus:
   type-aliases-package: com.redis.domain.entity # 别名扫描包
 logging:
   level:
-    com.hmdp: debug
+    com.redis: debug
   pattern:
     dateformat: mm:ss.SSS
