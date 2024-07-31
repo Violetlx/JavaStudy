@@ -19,5 +19,6 @@
 
 	<modules>
 		<module>XxlJob</module>
+		<module>Redis</module>
 	</modules>
 </project>
