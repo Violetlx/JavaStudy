@@ -1,6 +1,7 @@
 package com.redis.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.redis.domain.dto.Result;
@@ -41,13 +42,30 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop>
 
     @Override
     public Result queryById(Long id) {
+//        //1、从redis查询缓存
+//        String shouJson = stringRedisTemplate.opsForValue().get(CACHE_SHOP_KEY + id);
+//        //2、判断是否存在
+//        if (StrUtil.isNotBlank(shouJson)) {
+//            // 3、存在，直接返回
+//            Shop shop = JSONUtil.toBean(shouJson, Shop.class);
+//            return Result.ok(shop);
+//        }
+//        //4、不存在，根据id查询数据库
+//        Shop shopEntity = getById(id);
+//        //5、不存在、返回错误
+//        if (shopEntity == null) {
+//            return Result.fail("店铺不存在！");
+//        }
+//        //6、存在，写入redis
+//        stringRedisTemplate.opsForValue().set(CACHE_SHOP_KEY + id, JSONUtil.toJsonStr(shopEntity), CACHE_SHOP_TTL, TimeUnit.MINUTES);
+
         // 解决缓存穿透
-        Shop shop = cacheClient
-                .queryWithPassThrough(CACHE_SHOP_KEY, id, Shop.class, this::getById, CACHE_SHOP_TTL, TimeUnit.MINUTES);
+//        Shop shop = cacheClient
+//                .queryWithPassThrough(CACHE_SHOP_KEY, id, Shop.class, this::getById, CACHE_SHOP_TTL, TimeUnit.MINUTES);
 
         // 互斥锁解决缓存击穿
-        // Shop shop = cacheClient
-        //         .queryWithMutex(CACHE_SHOP_KEY, id, Shop.class, this::getById, CACHE_SHOP_TTL, TimeUnit.MINUTES);
+         Shop shop = cacheClient
+                 .queryWithMutex(CACHE_SHOP_KEY, id, Shop.class, this::getById, CACHE_SHOP_TTL, TimeUnit.MINUTES);
 
         // 逻辑过期解决缓存击穿
         // Shop shop = cacheClient
@@ -76,6 +94,8 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop>
 
     @Override
     public Result queryShopByType(Integer typeId, Integer current, Double x, Double y) {
+        x=null;
+        y=null;
         // 1.判断是否需要根据坐标查询
         if (x == null || y == null) {
             // 不需要坐标查询，按数据库查询
@@ -92,7 +112,8 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop>
 
         // 3.查询redis、按照距离排序、分页。结果：shopId、distance
         String key = SHOP_GEO_KEY + typeId;
-        GeoResults<RedisGeoCommands.GeoLocation<String>> results = stringRedisTemplate.opsForGeo() // GEOSEARCH key BYLONLAT x y BYRADIUS 10 WITHDISTANCE
+        // GEOSEARCH key BYLONLAT x y BYRADIUS 10 WITHDISTANCE
+        GeoResults<RedisGeoCommands.GeoLocation<String>> results = stringRedisTemplate.opsForGeo()
                 .search(
                         key,
                         GeoReference.fromCoordinate(x, y),

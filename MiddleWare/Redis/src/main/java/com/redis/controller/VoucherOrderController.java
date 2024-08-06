@@ -4,10 +4,7 @@ package com.redis.controller;
 import com.redis.domain.dto.Result;
 import com.redis.service.IVoucherOrderService;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -25,6 +22,7 @@ public class VoucherOrderController {
 
     @PostMapping("seckill/{id}")
     public Result seckillVoucher(@PathVariable("id") Long voucherId) {
+        System.out.println("voucherId:" + voucherId);
         return voucherOrderService.seckillVoucher(voucherId);
     }
 }

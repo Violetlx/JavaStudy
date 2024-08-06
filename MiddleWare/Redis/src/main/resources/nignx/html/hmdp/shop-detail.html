@@ -176,6 +176,7 @@
         axios.get("/voucher/list/" + shopId)
         .then(({data}) => {
           this.vouchers = data;
+          console.log(data.valueOf())
         })
         .catch(this.$message.error)
       },
@@ -224,6 +225,11 @@
         .then(({data}) => {
           // 抢购成功，这里输出订单id，支付功能TODO
           this.$message.success("抢购成功，订单id：" + data)
+          //刷新
+          setTimeout(() => {
+            window.location.reload();
+          }, 5);
+
         })
         .catch(this.$message.error)
       }

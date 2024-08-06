@@ -3,6 +3,9 @@ package com.redis.domain.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,6 +26,7 @@ public class SeckillVoucher implements Serializable {
     /**
      * 关联的优惠券的id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @TableId(value = "voucher_id")
     private Long voucherId;
 
@@ -36,24 +40,28 @@ public class SeckillVoucher implements Serializable {
      * 创建时间
      */
     @TableField(value = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 生效时间
      */
     @TableField(value = "begin_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date beginTime;
 
     /**
      * 失效时间
      */
     @TableField(value = "end_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     /**
      * 更新时间
      */
     @TableField(value = "update_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     @TableField(exist = false)

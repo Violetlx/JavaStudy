@@ -52,7 +52,8 @@ public class CacheClient {
             // 3.存在，直接返回
             return JSONUtil.toBean(json, type);
         }
-        // 判断命中的是否是空值
+
+        // 判断命中的是否是空值   "".equals(json)
         if (json != null) {
             // 返回一个错误信息
             return null;
@@ -72,6 +73,18 @@ public class CacheClient {
         return r;
     }
 
+    /**
+     * 逻辑过期解决缓存击穿
+     * @param keyPrefix String
+     * @param id ID
+     * @param type Class<R>
+     * @param dbFallback Function<ID, R>
+     * @param time Long
+     * @param unit TimeUnit
+     * @return R
+     * @param <R> R
+     * @param <ID> ID
+     */
     public <R, ID> R queryWithLogicalExpire(
             String keyPrefix, ID id, Class<R> type, Function<ID, R> dbFallback, Long time, TimeUnit unit) {
         String key = keyPrefix + id;
@@ -117,6 +130,18 @@ public class CacheClient {
         return r;
     }
 
+    /**
+     * 互斥锁解决缓存击穿
+     * @param keyPrefix String
+     * @param id ID
+     * @param type Class<R>
+     * @param dbFallback Function<ID, R>
+     * @param time Long
+     * @param unit TimeUnit
+     * @return R
+     * @param <R> R
+     * @param <ID> ID
+     */
     public <R, ID> R queryWithMutex(
             String keyPrefix, ID id, Class<R> type, Function<ID, R> dbFallback, Long time, TimeUnit unit) {
         String key = keyPrefix + id;
@@ -136,9 +161,11 @@ public class CacheClient {
         // 4.实现缓存重建
         // 4.1.获取互斥锁
         String lockKey = LOCK_SHOP_KEY + id;
+        System.out.println("lockKey ===> "+lockKey);
         R r = null;
         try {
             boolean isLock = tryLock(lockKey);
+            System.out.println("isLock ===> "+isLock);
             // 4.2.判断是否获取成功
             if (!isLock) {
                 // 4.3.获取锁失败，休眠并重试
@@ -154,6 +181,7 @@ public class CacheClient {
                 // 返回错误信息
                 return null;
             }
+            System.out.println("r ===> "+r);
             // 6.存在，写入redis
             this.set(key, r, time, unit);
         } catch (InterruptedException e) {
@@ -166,11 +194,21 @@ public class CacheClient {
         return r;
     }
 
+    /**
+     * 获取锁
+     * @param key String
+     * @return boolean
+     */
     private boolean tryLock(String key) {
         Boolean flag = stringRedisTemplate.opsForValue().setIfAbsent(key, "1", 10, TimeUnit.SECONDS);
+        //拆箱
         return BooleanUtil.isTrue(flag);
     }
 
+    /**
+     * 释放锁
+     * @param key String
+     */
     private void unlock(String key) {
         stringRedisTemplate.delete(key);
     }

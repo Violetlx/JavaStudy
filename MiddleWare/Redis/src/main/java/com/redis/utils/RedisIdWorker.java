@@ -8,6 +8,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * Redis实现全局唯一Id
  * @author lixuan
  */
 @Component
@@ -27,10 +28,11 @@ public class RedisIdWorker {
         this.stringRedisTemplate = stringRedisTemplate;
     }
 
-    public long nextId(String keyPrefix) {
+    public long nextId(String keyPrefix) { //不同的id需要不同的前缀存在redis
         // 1.生成时间戳
         LocalDateTime now = LocalDateTime.now();
         long nowSecond = now.toEpochSecond(ZoneOffset.UTC);
+        //当前时间-开始时间
         long timestamp = nowSecond - BEGIN_TIMESTAMP;
 
         // 2.生成序列号

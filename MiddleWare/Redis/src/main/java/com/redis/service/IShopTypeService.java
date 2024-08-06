@@ -1,5 +1,6 @@
 package com.redis.service;
 
+import com.redis.domain.dto.Result;
 import com.redis.domain.entity.ShopType;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface IShopTypeService extends IService<ShopType> {
 
+    Result cacheShopTypeList();
+
+    Result queryById(Long id);
 }
