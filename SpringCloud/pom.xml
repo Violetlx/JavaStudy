@@ -18,6 +18,7 @@
 
     <!--子模块-->
     <modules>
+        <module>MyBatisPlus</module>
     </modules>
 
     <!--依赖管理-->
