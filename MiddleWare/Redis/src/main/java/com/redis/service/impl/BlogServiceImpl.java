@@ -94,10 +94,12 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog>
 
     @Override
     public Result likeBlog(Long id) {
+        //要求一个用户同一篇文章只能点赞一次
         // 1.获取登录用户
         Long userId = UserHolder.getUser().getId();
         // 2.判断当前登录用户是否已经点赞
         String key = BLOG_LIKED_KEY + id;
+        //set 不重复 blog的id作为key 用户id作为value  获取用户点赞状态
         Double score = stringRedisTemplate.opsForZSet().score(key, userId.toString());
         if (score == null) {
             // 3.如果未点赞，可以点赞

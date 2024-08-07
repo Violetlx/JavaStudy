@@ -66,6 +66,9 @@ public class BlogController {
         return blogService.queryBlogById(id);
     }
 
+    /**
+     * 查询点赞用户列表
+     */
     @GetMapping("/likes/{id}")
     public Result queryBlogLikes(@PathVariable("id") Long id) {
         return blogService.queryBlogLikes(id);
@@ -83,6 +86,9 @@ public class BlogController {
         return Result.ok(records);
     }
 
+    /**
+     * 查询关注用户最新博客列表 滚动分页
+     */
     @GetMapping("/of/follow")
     public Result queryBlogOfFollow(
             @RequestParam("lastId") Long max, @RequestParam(value = "offset", defaultValue = "0") Integer offset){

@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
- * <p>
- * 前端控制器
- * </p>
- *
+ * 用户控制器
  * @author 虎哥
  */
 @Slf4j
@@ -100,6 +97,9 @@ public class UserController {
         return Result.ok(userDTO);
     }
 
+    /**
+     * 用户签到
+     */
     @PostMapping("/sign")
     public Result sign(){
         return userService.sign();
