@@ -2,6 +2,7 @@ package com.mybatisplus;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mybatisplus.domain.entity.AddressEntity;
@@ -130,11 +131,18 @@ class MyBatisPlusApplicationTests {
     @Test
     void testPageQuery() {
         // 1.分页查询，new Page()的两个参数分别是：页码、每页大小
-        Page<UserEntity> p = userService.page(new Page<>(2, 2));
+        int current = 1;
+        int size = 2;
+        Page<UserEntity> page = Page.of(current, size);
+        // 1.2、排序
+        page.addOrder(OrderItem.asc("balance"));
+        page.addOrder(OrderItem.desc("id"));
+        Page<UserEntity> p = userService.page(page);
         // 2.总条数
         System.out.println("total = " + p.getTotal());
         // 3.总页数
         System.out.println("pages = " + p.getPages());
+
         // 4.数据
         List<UserEntity> records = p.getRecords();
         records.forEach(System.out::println);

@@ -2,12 +2,18 @@ package com.mybatisplus.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisplus.domain.dto.PageDTO;
 import com.mybatisplus.domain.dto.UserDTO;
 import com.mybatisplus.domain.entity.AddressEntity;
 import com.mybatisplus.domain.entity.UserEntity;
+import com.mybatisplus.domain.query.UserQuery;
 import com.mybatisplus.domain.vo.AddressVO;
 import com.mybatisplus.domain.vo.UserVO;
 import com.mybatisplus.eum.UserStatus;
@@ -185,6 +191,31 @@ public class UserController {
                     });
         });
         return userVOList;
+    }
+
+    /**
+     * 分页查询 page
+     */
+    @GetMapping("/page")
+    @Operation(summary = "分页查询 page")
+    public PageDTO<UserVO> queryUsersPage(@ParameterObject UserQuery query){
+        log.info("queryUsersPage ===> {}", query);
+        Page<UserEntity> userEntityPage = userService.page(new Page<UserEntity>(query.getPageNo(), query.getPageSize())
+                        .addOrder(ObjectUtil.isEmpty(query.getSortBy()) ?
+                                OrderItem.desc("update_time") :
+                                (query.getIsAsc() != null && query.getIsAsc() ?
+                                        OrderItem.asc(query.getSortBy()) :
+                                        OrderItem.desc(query.getSortBy()))),
+                Wrappers.lambdaQuery(UserEntity.class)
+                        .like(StrUtil.isNotBlank(query.getName()), UserEntity::getUsername, query.getName())
+                        .between(query.getMinBalance() != null && query.getMaxBalance() != null, UserEntity::getBalance, query.getMinBalance(), query.getMaxBalance()));
+        System.out.println("userEntityPage = " + userEntityPage.getRecords());
+        //转换为Vo
+        List<UserVO> userVOList = BeanUtil.copyToList(userEntityPage.getRecords(), UserVO.class);
+        PageDTO<UserVO> userVoPageDTO = new PageDTO<>(userEntityPage.getCurrent(), userEntityPage.getSize(), userVOList);
+        userVoPageDTO.setTotal(userEntityPage.getTotal());
+        System.out.println("userVoPageDTO = " + userVoPageDTO.getPages());
+        return userService.queryUsersPage(query);
     }
 
 }

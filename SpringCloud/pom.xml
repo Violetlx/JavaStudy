@@ -19,6 +19,7 @@
     <!--子模块-->
     <modules>
         <module>MyBatisPlus</module>
+        <module>Cloud</module>
     </modules>
 
     <!--依赖管理-->

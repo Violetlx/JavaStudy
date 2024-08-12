@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.service.mapper.OrderLogisticsMapper">
+
+    <resultMap id="BaseResultMap" type="com.cloud.service.domain.entity.OrderLogisticsEntity">
+            <id property="orderId" column="order_id" jdbcType="BIGINT"/>
+            <result property="logisticsNumber" column="logistics_number" jdbcType="VARCHAR"/>
+            <result property="logisticsCompany" column="logistics_company" jdbcType="VARCHAR"/>
+            <result property="contact" column="contact" jdbcType="VARCHAR"/>
+            <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+            <result property="province" column="province" jdbcType="VARCHAR"/>
+            <result property="city" column="city" jdbcType="VARCHAR"/>
+            <result property="town" column="town" jdbcType="VARCHAR"/>
+            <result property="street" column="street" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        order_id,logistics_number,logistics_company,
+        contact,mobile,province,
+        city,town,street,
+        create_time,update_time
+    </sql>
+</mapper>
