@@ -20,6 +20,7 @@
     <modules>
         <module>MyBatisPlus</module>
         <module>Cloud</module>
+        <module>CloudStudy</module>
     </modules>
 
     <!--依赖管理-->
