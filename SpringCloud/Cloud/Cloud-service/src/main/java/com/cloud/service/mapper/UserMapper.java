@@ -2,6 +2,8 @@ package com.cloud.service.mapper;
 
 import com.cloud.service.domain.entity.UserEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 /**
 * @author 1045754
@@ -11,6 +13,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface UserMapper extends BaseMapper<UserEntity> {
 
+    @Update("update user set balance = balance - ${totalFee} where id = #{userId}")
+    void updateMoney(@Param("userId") Long userId, @Param("totalFee") Integer totalFee);
 }
 
 

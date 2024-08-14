@@ -144,4 +144,19 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 解决没有main函数报错unable to find main class 的问题-->
+                <!--打成可被依赖jar结构-->
+                <configuration>
+                    <layout>NONE</layout>
+                    <classifier>execute</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

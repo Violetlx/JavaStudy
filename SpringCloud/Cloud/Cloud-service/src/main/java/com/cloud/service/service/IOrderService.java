@@ -1,5 +1,6 @@
 package com.cloud.service.service;
 
+import com.cloud.service.domain.dto.OrderFormDTO;
 import com.cloud.service.domain.entity.OrderEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface IOrderService extends IService<OrderEntity> {
 
+    Long createOrder(OrderFormDTO orderFormDTO);
+
+    void markOrderPaySuccess(Long orderId);
 }

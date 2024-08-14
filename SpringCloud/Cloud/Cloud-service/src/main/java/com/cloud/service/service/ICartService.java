@@ -1,7 +1,12 @@
 package com.cloud.service.service;
 
+import com.cloud.service.domain.dto.CartFormDTO;
 import com.cloud.service.domain.entity.CartEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cloud.service.domain.vo.CartVO;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
 * @author 1045754
@@ -10,4 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ICartService extends IService<CartEntity> {
 
+    void addItem2Cart(CartFormDTO cartFormDTO);
+
+    List<CartVO> queryMyCarts();
+
+    void removeByItemIds(Collection<Long> itemIds);
 }

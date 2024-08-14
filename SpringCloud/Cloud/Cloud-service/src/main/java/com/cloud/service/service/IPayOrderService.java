@@ -1,5 +1,7 @@
 package com.cloud.service.service;
 
+import com.cloud.service.domain.dto.PayApplyDTO;
+import com.cloud.service.domain.dto.PayOrderFormDTO;
 import com.cloud.service.domain.entity.PayOrderEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface IPayOrderService extends IService<PayOrderEntity> {
 
+    String applyPayOrder(PayApplyDTO applyDTO);
+
+    void tryPayOrderByBalance(PayOrderFormDTO payOrderFormDTO);
 }

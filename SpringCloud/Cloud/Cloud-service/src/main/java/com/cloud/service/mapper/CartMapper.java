@@ -2,6 +2,8 @@ package com.cloud.service.mapper;
 
 import com.cloud.service.domain.entity.CartEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 /**
 * @author 1045754
@@ -11,6 +13,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface CartMapper extends BaseMapper<CartEntity> {
 
+    @Update("UPDATE cart SET num = num + 1 WHERE user_id = #{userId} AND item_id = #{itemId}")
+    void updateNum(@Param("itemId") Long itemId, @Param("userId") Long userId);
 }
 
 

@@ -1,7 +1,9 @@
 package com.cloud.service.service;
 
+import com.cloud.service.domain.dto.LoginFormDTO;
 import com.cloud.service.domain.entity.UserEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cloud.service.domain.vo.UserLoginVO;
 
 /**
 * @author 1045754
@@ -10,4 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface IUserService extends IService<UserEntity> {
 
+    void deductMoney(String pw, Integer amount);
+
+    UserLoginVO login(LoginFormDTO loginFormDTO);
 }
