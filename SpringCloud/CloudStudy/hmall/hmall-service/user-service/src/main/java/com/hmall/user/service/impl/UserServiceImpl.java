@@ -53,6 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadRequestException("用户名或密码错误");
         }
+        System.out.println("1111111111111111111111");
         // 5.生成TOKEN
         String token = jwtTool.createToken(user.getId(), jwtProperties.getTokenTTL());
         // 6.封装VO返回

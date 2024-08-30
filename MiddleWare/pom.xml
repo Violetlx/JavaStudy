@@ -18,7 +18,7 @@
 	<description>MiddleWare 集合</description>
 
 	<modules>
-		<module>XxlJob</module>
+		<module>xxl-job</module>
 		<module>Redis</module>
 	</modules>
 </project>
