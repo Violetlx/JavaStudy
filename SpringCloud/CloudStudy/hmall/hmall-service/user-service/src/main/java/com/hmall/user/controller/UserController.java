@@ -1,8 +1,11 @@
 package com.hmall.user.controller;
 
+import com.hmall.common.config.DefaultFeignConfig;
+import com.hmall.common.utils.UserContext;
 import com.hmall.user.domain.dto.LoginFormDTO;
 import com.hmall.user.domain.vo.UserLoginVO;
 import com.hmall.user.service.IUserService;
+import com.user.service.api.feign.UserClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -35,6 +38,9 @@ public class UserController {
     })
     @PutMapping("/money/deduct")
     public void deductMoney(@RequestParam("pw") String pw,@RequestParam("amount") Integer amount){
+        System.out.println("用户ID：" + UserContext.getUser());
+        System.out.println("支付密码：" + pw);
+        System.out.println("扣款金额：" + amount);
         userService.deductMoney(pw, amount);
     }
 }

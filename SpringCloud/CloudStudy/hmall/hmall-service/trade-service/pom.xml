@@ -90,6 +90,12 @@
             <artifactId>cart-service-api</artifactId>
             <version>${version}</version>
         </dependency>
+        <!--引入trade-service-api-->
+        <dependency>
+            <groupId>com</groupId>
+            <artifactId>pay-service-api</artifactId>
+            <version>${version}</version>
+        </dependency>
         <!--nacos配置管理-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -110,6 +116,7 @@
             <artifactId>seata-spring-boot-starter</artifactId>
             <version>2.0.0-SNAPSHOT</version>
         </dependency>
+
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

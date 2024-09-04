@@ -20,5 +20,6 @@
 	<modules>
 		<module>xxl-job</module>
 		<module>Redis</module>
+		<module>RabbitMQ</module>
 	</modules>
 </project>
