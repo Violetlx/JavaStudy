@@ -1,5 +1,6 @@
 package com.sa.token.controller;
 
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     // 测试登录  ---- http://localhost:8081/acc/doLogin?name=zhang&pwd=123456
+    @SaIgnore
     @RequestMapping("doLogin")
     public SaResult doLogin(String name, String pwd) {
         // 此处仅作模拟示例，真实项目需要从数据库中查询数据进行比对

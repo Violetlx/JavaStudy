@@ -20,6 +20,7 @@
     <!--子模块-->
     <modules>
         <module>Lambda</module>
+        <module>Algorithms</module>
     </modules>
 
     <!--依赖-->

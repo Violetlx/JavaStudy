@@ -1,7 +1,9 @@
 package com.sa.token.controller;
 
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.dev33.satoken.util.SaResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -81,6 +83,14 @@ public class UserController {
         System.out.println("当前会话的 token 信息参数 = " + tokenInfo);
 
         return StpUtil.getTokenInfo().toString();
+    }
+
+    // 测试忽略注解 http://localhost:8081/user/getList
+    @SaIgnore
+    @RequestMapping("/getList")
+    public SaResult getList() {
+        System.out.println("------------ 访问进来方法");
+        return SaResult.ok();
     }
 
 }
