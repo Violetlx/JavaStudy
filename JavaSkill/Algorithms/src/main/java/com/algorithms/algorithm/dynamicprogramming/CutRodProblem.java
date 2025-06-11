@@ -1,6 +1,6 @@
 package com.algorithms.algorithm.dynamicprogramming;
 
-import static com.itheima.algorithm.dynamicprogramming.ChangeMakingProblemLeetcode518.print;
+import static com.algorithms.algorithm.dynamicprogramming.ChangeMakingProblemLeetcode518.print;
 
 /**
  * <h3>钢条切割问题 - 动态规划</h3>

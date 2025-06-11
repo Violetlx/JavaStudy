@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -146,5 +147,44 @@ class MyBatisPlusApplicationTests {
         // 4.数据
         List<UserEntity> records = p.getRecords();
         records.forEach(System.out::println);
+    }
+
+    public static boolean matchPrefix(String input, List<String> prefixList) {
+        // 遍历前缀列表
+        for (String prefix : prefixList) {
+            // 检查输入字符串是否以当前前缀开头
+            if (input.startsWith(prefix)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Test
+    void testPageQuery2() {
+        // 示例输入字符串
+        String input = "abcdefg";
+        // 示例前缀列表
+        List<String> prefixList = Arrays.asList("ab", "xyz", "123");
+
+        // 调用匹配方法
+        boolean isMatch = matchPrefix(input, prefixList);
+
+        // 输出匹配结果
+        if (isMatch) {
+            System.out.println("输入字符串以列表中的某个前缀开头。");
+        } else {
+            System.out.println("输入字符串不以列表中的任何前缀开头。");
+        }
+    }
+
+    @Test
+    void testPageQuery3() {
+        System.out.println(addDigits(39));
+    }
+
+    public int addDigits(int num) {
+        return (num - 1) % 9 + 1;
     }
 }

@@ -21,6 +21,9 @@
     <modules>
         <module>Lambda</module>
         <module>Algorithms</module>
+        <module>Hutool</module>
+        <module>LeetCode</module>
+        <module>SpringAI</module>
     </modules>
 
     <!--依赖-->

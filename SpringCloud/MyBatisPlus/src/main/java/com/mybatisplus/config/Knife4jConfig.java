@@ -26,7 +26,7 @@ public class Knife4jConfig {
                                 .email("2789968443@qq.com")))
                 .externalDocs(new ExternalDocumentation()
                         .description("springboot基础框架")
-                        .url("http://localhost:8082/doc.html"));
+                        .url("http://localhost:8081/doc.html"));
 
     }
 

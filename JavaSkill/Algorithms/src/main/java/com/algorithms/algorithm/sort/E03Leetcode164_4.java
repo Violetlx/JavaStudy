@@ -1,7 +1,7 @@
 package com.algorithms.algorithm.sort;
 
 
-import com.itheima.datastructure.array.DynamicArray;
+import com.algorithms.datastructure.array.DynamicArray;
 
 public class E03Leetcode164_4 {
     public int maximumGap(int[] nums) {
